@@ -1,0 +1,19 @@
+parameters:
+  - name: goal
+    type: string
+    default: package
+  - name: test
+    type: string
+    default: '**/surefire-reports/TEST-*.xml'
+steps:
+  - task: Maven@4
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: ${{ parameters.goal }}
+      publishJUnitResults: true
+      testResultsFiles: ${{ parameters.test }}
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: drop      
+
