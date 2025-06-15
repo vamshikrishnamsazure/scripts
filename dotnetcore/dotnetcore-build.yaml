@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 parameters:
   - name: mainproject
     type: string
@@ -23,29 +23,4 @@ steps:
     inputs:
       pathToPublish: '$(Build.ArtifactStagingDirectory)/Output'
       artifactName: drop    
-=======
-parameters:
-  - name: mainproject
-    type: string
-    default: '**/*.csproj'
 
-steps:
-  - task:  DotNetCoreCLI@2
-    displayName: Build
-    inputs:
-      command: 'build'
-      projects: '${{ parameters.mainproject }}'
-  - task: DotNetCoreCLI@2
-    displayName: Publish project 
-    inputs:
-      command: 'publish'
-      projects: '${{ parameters.mainproject }}'
-      publishWebProjects: false
-      arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
-      zipAfterPublish: true
-      modifyOutputPath: true
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: '$(Build.ArtifactStagingDirectory)/Output'
-      artifactName: drop    
->>>>>>> c3933daeaf6c24ed67e46a4b513a71266dd6a061
